@@ -26,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     int currentSet = 1;
     int currentRep = 1;
+    int repTimeSeconds;
 
-    final int countDownValue = 5;
-    final int breakValue = 120;
+//    final int countDownValue = 5;
+    final int breakValue = 30;
+//    final int countDownValue = 5;
 
     boolean isRunning = false;
 
@@ -61,12 +63,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private int getTimerSeconds() {
+        String value = timerValue.getText().toString().trim();
 
+        String[] parts = value.split(":");
+
+        int minutes = Integer.parseInt(parts[0]);
+        int seconds = Integer.parseInt(parts[1]);
+
+        return (minutes * 60) + seconds;
+    }
     private void startWorkout(){
         int totalReps = getReps();
         int totalSets = getSets();
+        repTimeSeconds = getTimerSeconds();
 
-        if(totalSets<=0){
+        if(totalSets <= 0 || totalReps <= 0 || repTimeSeconds <= 0){
             return;
         }
         currentRep=1;
@@ -77,10 +89,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRepTimer(int totalReps){
-        timerValue.setText("00:05");
-
+//        int countDownValue = getTimerSeconds();
+//        timerValue.setText(String.valueOf(countDownValue));
+        timerValue.setText(
+                String.format("%02d:%02d",
+                        repTimeSeconds / 60,
+                        repTimeSeconds % 60)
+        );
         countDownTimer = new CountDownTimer(
-                countDownValue * 1000L,1000
+                repTimeSeconds * 1000L,1000
         ) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -109,16 +126,44 @@ public class MainActivity extends AppCompatActivity {
     private void finishSet(int totalReps) {
 
         if (currentSet < getSets()) {
-
-            currentSet++;
-            currentRep = 1;
-
-            startRepTimer(totalReps);
+            startBreakTimer(totalReps);
 
         } else {
-
             workoutFinished();
         }
+    }
+    private void startBreakTimer(int totalReps) {
+
+        timerValue.setText("00:30");
+
+        countDownTimer = new CountDownTimer(
+                breakValue * 1000L,
+                1000
+        ) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                int seconds =
+                        (int) (millisUntilFinished / 1000);
+
+                timerValue.setText(
+                        String.format("00:%02d", seconds)
+                );
+            }
+
+            @Override
+            public void onFinish() {
+
+                beep();
+
+                currentSet++;
+                currentRep = 1;
+
+                startRepTimer(totalReps);
+            }
+
+        }.start();
     }
 
     private void pauseTimer(){
