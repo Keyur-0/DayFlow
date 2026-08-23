@@ -51,5 +51,121 @@ public class MainActivity extends AppCompatActivity {
         repsInput = findViewById(R.id.repsInput);
 
         toneGenerator = new ToneGenerator(AudioManager.STREAM_ALARM,100);
+
+        playButton.setOnClickListener(v ->{
+            if(!isRunning){
+                startWorkout();
+            }
+            else{
+                pauseTimer();
+            }
+        });
+    }
+
+    private void startWorkout(){
+        int totalReps = getReps();
+        int totalSets = getSets();
+
+        if(totalSets<=0){
+            return;
+        }
+        currentRep=1;
+        currentSet=1;
+        isRunning= true;
+
+        startRepTimer(totalReps);
+    }
+
+    private void startRepTimer(int totalReps){
+        timerValue.setText("00:05");
+
+        countDownTimer = new CountDownTimer(
+                countDownValue * 1000L,1000
+        ) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int seconds =
+                        (int) (millisUntilFinished / 1000);
+
+                timerValue.setText(
+                        String.format("00:%02d", seconds)
+                );
+            }
+            @Override
+            public void onFinish() {
+                beep();
+
+                currentRep++;
+
+                if(currentRep<=totalReps){
+                    startRepTimer(totalReps);
+                }
+                else{
+                    finishSet(totalReps);
+                }
+            }
+        }.start();
+    }
+    private void finishSet(int totalReps) {
+
+        if (currentSet < getSets()) {
+
+            currentSet++;
+            currentRep = 1;
+
+            startRepTimer(totalReps);
+
+        } else {
+
+            workoutFinished();
+        }
+    }
+
+    private void pauseTimer(){
+        if(countDownTimer != null){
+            countDownTimer.cancel();
+        }
+        isRunning = false;
+    }
+
+    private void workoutFinished(){
+        timerValue.setText("DONE");
+        beep();
+        isRunning = false;
+    }
+
+    private int getSets(){
+        String value = setInput.getText().toString().trim();
+        try {
+            return Integer.parseInt(value);
+        }catch (NumberFormatException e){
+            return 1;
+        }
+    }
+
+    private int getReps(){
+        String value = repsInput.getText().toString().trim();
+        try {
+            return Integer.parseInt(value);
+        }catch (NumberFormatException e){
+            return 1;
+        }
+    }
+
+    private void beep(){
+        toneGenerator.startTone(
+                ToneGenerator.TONE_PROP_BEEP,200
+        );
+    }
+
+    @Override
+    protected void onDestroy(){
+        if (countDownTimer != null){
+            countDownTimer.cancel();
+        }
+        if (toneGenerator !=null){
+            toneGenerator.release();
+        }
+        super.onDestroy();
     }
 }
