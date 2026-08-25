@@ -214,6 +214,29 @@
                         android:textColor="#9F84E7"
                         android:textSize="16sp" />
 
+                    <TextView
+                        android:id="@+id/restLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="Rest"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <!-- Rest value -->
+                    <EditText
+                        android:id="@+id/restInput"
+                        android:layout_width="65dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="4dp"
+                        android:gravity="center"
+                        android:text="00:30"
+                        android:textColor="#9F84E7"
+                        android:textSize="16sp"
+                        android:inputType="time"
+                        android:padding="0dp" />
+
                 </LinearLayout>
 
                 <!-- Rest / Reps -->

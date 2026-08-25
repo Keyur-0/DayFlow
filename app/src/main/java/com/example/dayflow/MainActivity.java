@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button playButton;
     ImageButton resetButton;
     EditText timerValue;
+    EditText restInput;
     AutoCompleteTextView setInput;
     AutoCompleteTextView repsInput;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     int repTimeSeconds;
 
 //    final int countDownValue = 5;
-    final int breakValue = 30;
+    int breakValue;
 //    final int countDownValue = 5;
 
     boolean isRunning = false;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         playButton = findViewById(R.id.playButton);
         resetButton = findViewById(R.id.resetButton);
+        restInput = findViewById(R.id.restInput);
         timerValue = findViewById(R.id.timerValue);
         setInput = findViewById(R.id.setInput);
         repsInput = findViewById(R.id.repsInput);
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         int totalReps = getReps();
         int totalSets = getSets();
         repTimeSeconds = getTimerSeconds();
+        breakValue = getBreakSeconds();
 
         if(totalSets <= 0 || totalReps <= 0 || repTimeSeconds <= 0){
             return;
@@ -156,7 +159,11 @@ public class MainActivity extends AppCompatActivity {
     }
     private void startBreakTimer(int totalReps) {
 
-        timerValue.setText("00:30");
+        timerValue.setText(
+                String.format("%02d:%02d",
+                        breakValue / 60,
+                        breakValue % 60)
+        );
 
         countDownTimer = new CountDownTimer(
                 breakValue * 1000L,
@@ -169,8 +176,13 @@ public class MainActivity extends AppCompatActivity {
                 int seconds =
                         (int) (millisUntilFinished / 1000);
 
+//                timerValue.setText(
+//                        String.format("00:%02d", seconds)
+//                );
                 timerValue.setText(
-                        String.format("00:%02d", seconds)
+                        String.format("%02d:%02d",
+                                seconds / 60,
+                                seconds % 60)
                 );
             }
 
@@ -197,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void workoutFinished(){
         timerValue.setText("DONE");
-        beep();
         isRunning = false;
     }
 
@@ -218,7 +229,16 @@ public class MainActivity extends AppCompatActivity {
             return 1;
         }
     }
+    private int getBreakSeconds() {
+        String value = restInput.getText().toString().trim();
 
+        String[] parts = value.split(":");
+
+        int minutes = Integer.parseInt(parts[0]);
+        int seconds = Integer.parseInt(parts[1]);
+
+        return (minutes * 60) + seconds;
+    }
     private void beep(){
         toneGenerator.startTone(
                 ToneGenerator.TONE_PROP_BEEP,200
