@@ -14,18 +14,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     //Ui
     Button playButton;
     ImageButton resetButton;
+    Button addExercise;
     EditText timerValue;
     EditText restInput;
     AutoCompleteTextView setInput;
     AutoCompleteTextView repsInput;
 
     CountDownTimer countDownTimer;
+
+    List<Exercise> exercises = new ArrayList<>();
 
     int currentSet = 1;
     int currentRep = 1;
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         playButton = findViewById(R.id.playButton);
         resetButton = findViewById(R.id.resetButton);
+        addExercise = findViewById(R.id.addExercise);
         restInput = findViewById(R.id.restInput);
         timerValue = findViewById(R.id.timerValue);
         setInput = findViewById(R.id.setInput);
@@ -59,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         toneGenerator = new ToneGenerator(AudioManager.STREAM_ALARM,100);
 
-        resetButton.setOnClickListener(v -> {
-            resetWorkout();
-        });
         playButton.setOnClickListener(v ->{
             if(!isRunning){
                 startWorkout();
@@ -70,6 +73,18 @@ public class MainActivity extends AppCompatActivity {
                 pauseTimer();
             }
         });
+
+        resetButton.setOnClickListener(v -> {
+            resetWorkout();
+        });
+
+        addExercise.setOnClickListener(v -> {
+            addNewExercise();
+        });
+    }
+    private void addNewExercise() {
+        // inflate exercise_item.xml
+        // add it to exerciseContainer
     }
     private int getTimerSeconds() {
         String value = timerValue.getText().toString().trim();
