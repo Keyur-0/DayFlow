@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Ui
     Button playButton;
+    ImageButton resetButton;
     EditText timerValue;
     AutoCompleteTextView setInput;
     AutoCompleteTextView repsInput;
@@ -48,12 +50,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         playButton = findViewById(R.id.playButton);
+        resetButton = findViewById(R.id.resetButton);
         timerValue = findViewById(R.id.timerValue);
         setInput = findViewById(R.id.setInput);
         repsInput = findViewById(R.id.repsInput);
 
         toneGenerator = new ToneGenerator(AudioManager.STREAM_ALARM,100);
 
+        resetButton.setOnClickListener(v -> {
+            resetWorkout();
+        });
         playButton.setOnClickListener(v ->{
             if(!isRunning){
                 startWorkout();
@@ -72,6 +78,22 @@ public class MainActivity extends AppCompatActivity {
         int seconds = Integer.parseInt(parts[1]);
 
         return (minutes * 60) + seconds;
+    }
+    private void resetWorkout() {
+
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+
+        currentSet = 1;
+        currentRep = 1;
+        isRunning = false;
+
+        timerValue.setText(
+                String.format("%02d:%02d",
+                        repTimeSeconds / 60,
+                        repTimeSeconds % 60)
+        );
     }
     private void startWorkout(){
         int totalReps = getReps();

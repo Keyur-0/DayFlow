@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="80dp"
@@ -207,11 +208,11 @@
                         android:layout_height="40dp"
                         android:layout_marginStart="8dp"
                         android:gravity="center"
+                        android:inputType="text"
+                        android:singleLine="true"
                         android:text="00:05"
                         android:textColor="#9F84E7"
-                        android:textSize="16sp"
-                        android:inputType="text"
-                        android:singleLine="true" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -254,4 +255,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageButton
+        android:id="@+id/resetButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/circle_button"
+        android:padding="7dp"
+        android:scaleType="centerInside"
+        android:src="@android:drawable/ic_popup_sync"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/playButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
