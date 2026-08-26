@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Exercise -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Drag Handle -->
+            <TextView
+                android:id="@+id/dragExercise"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:text="⁙"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
+
+            <!-- Exercise Name -->
+            <TextView
+                android:id="@+id/exerciseName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dumbbell press"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+
+            <!-- Set Label -->
+            <TextView
+                android:id="@+id/setLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Set: "
+                android:textColor="#F8F7FB"
+                android:textSize="14sp" />
+
+            <!-- Sets -->
+            <AutoCompleteTextView
+                android:id="@+id/setInput"
+                android:layout_width="55dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:padding="0dp"
+                android:text="2"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <!-- Reps Label -->
+            <TextView
+                android:id="@+id/repsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Reps: "
+                android:textColor="#F8F6FD"
+                android:textSize="14sp" />
+
+            <!-- Reps -->
+            <AutoCompleteTextView
+                android:id="@+id/repsInput"
+                android:layout_width="65dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:padding="0dp"
+                android:text="10"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <!-- Delete -->
+            <TextView
+                android:id="@+id/deleteTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🗑"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+        <!-- Timer Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Timer Type -->
+            <AutoCompleteTextView
+                android:id="@+id/timerType"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="12dp"
+                android:gravity="center"
+                android:inputType="none"
+                android:padding="0dp"
+                android:text="Countdown"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <!-- Timer -->
+            <EditText
+                android:id="@+id/timerValue"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:inputType="text"
+                android:singleLine="true"
+                android:text="00:05"
+                android:textColor="#9F84E7"
+                android:textSize="16sp" />
+
+            <!-- Rest Label -->
+            <TextView
+                android:id="@+id/restLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="Rest"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <!-- Rest -->
+            <EditText
+                android:id="@+id/restInput"
+                android:layout_width="65dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:gravity="center"
+                android:inputType="time"
+                android:padding="0dp"
+                android:text="00:30"
+                android:textColor="#9F84E7"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
