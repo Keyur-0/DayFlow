@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- Exercise -->
+        <!-- Exercise Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,13 +28,19 @@
                 android:textSize="22sp" />
 
             <!-- Exercise Name -->
-            <TextView
+            <EditText
                 android:id="@+id/exerciseName"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
+                android:backgroundTint="#55505F"
+                android:hint="Exercise name"
+                android:inputType="textCapSentences"
+                android:padding="4dp"
+                android:singleLine="true"
                 android:text="Dumbbell press"
                 android:textColor="#FFFFFF"
+                android:textColorHint="#777777"
                 android:textSize="12sp" />
 
             <!-- Set Label -->
@@ -63,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Reps: "
-                android:textColor="#F8F6FD"
+                android:textColor="#F8F7FB"
                 android:textSize="14sp" />
 
             <!-- Reps -->
@@ -72,7 +79,7 @@
                 android:layout_width="65dp"
                 android:layout_height="35dp"
                 android:gravity="center"
-                android:inputType="number"
+                android:inputType="text"
                 android:padding="0dp"
                 android:text="10"
                 android:textColor="#FFFFFF"
@@ -83,6 +90,7 @@
                 android:id="@+id/deleteTask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="🗑"
                 android:textSize="18sp" />
 
@@ -149,5 +157,14 @@
 
         </LinearLayout>
 
+
+        <!-- Exercise Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#5A536A" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

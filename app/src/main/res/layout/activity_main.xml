@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -20,7 +22,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -66,9 +68,10 @@
                     android:src="@android:drawable/ic_menu_my_calendar" />
 
             </LinearLayout>
+
+
             <!-- Workout Card -->
             <LinearLayout
-                android:id="@+id/exerciseContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -111,145 +114,16 @@
                 </LinearLayout>
 
 
-                <!-- Exercise -->
+                <!-- Exercise Container -->
+                <!-- Exercise views will be added here dynamically -->
                 <LinearLayout
+                    android:id="@+id/exerciseContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="vertical" />
 
-                    <TextView
-                        android:id="@+id/dragExercise"
-                        android:layout_width="24dp"
-                        android:layout_height="wrap_content"
-                        android:text="⁙"
-                        android:textColor="#FFFFFF"
-                        android:textSize="22sp" />
 
-                    <TextView
-                        android:id="@+id/exerciseName"
-                        android:layout_width="84dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Dumbbell press"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/setLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" Set: "
-                        android:textColor="#F8F7FB"
-                        android:textSize="14sp" />
-
-                    <AutoCompleteTextView
-                        android:id="@+id/setInput"
-                        android:layout_width="55dp"
-                        android:layout_height="35dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:padding="0dp"
-                        android:text="2"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/repsLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="  Reps: "
-                        android:textColor="#F8F6FD"
-                        android:textSize="14sp" />
-
-                    <AutoCompleteTextView
-                        android:id="@+id/repsInput"
-                        android:layout_width="65dp"
-                        android:layout_height="35dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:padding="0dp"
-                        android:text="10"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/deleteTask"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🗑"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-                <!-- Timer Row -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/timerType"
-                        android:layout_width="110dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="12dp"
-                        android:gravity="center"
-                        android:inputType="none"
-                        android:padding="0dp"
-                        android:text="Countdown"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-
-                    <EditText
-                        android:id="@+id/timerValue"
-                        android:layout_width="100dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:inputType="text"
-                        android:singleLine="true"
-                        android:text="00:05"
-                        android:textColor="#9F84E7"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/restLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:text="Rest"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-
-                    <!-- Rest value -->
-                    <EditText
-                        android:id="@+id/restInput"
-                        android:layout_width="65dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="4dp"
-                        android:gravity="center"
-                        android:text="00:30"
-                        android:textColor="#9F84E7"
-                        android:textSize="16sp"
-                        android:inputType="time"
-                        android:padding="0dp" />
-
-                </LinearLayout>
-
-                <!-- Rest / Reps -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" />
-
-                <!-- Add Exercise -->
+                <!-- Add Exercise Button -->
                 <Button
                     android:id="@+id/addExercise"
                     android:layout_width="match_parent"
@@ -262,7 +136,9 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
+
 
     <!-- Play Button -->
     <Button
@@ -279,6 +155,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <!-- Reset Button -->
     <ImageButton
         android:id="@+id/resetButton"
         android:layout_width="50dp"
@@ -291,4 +169,5 @@
         android:src="@android:drawable/ic_popup_sync"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/playButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
