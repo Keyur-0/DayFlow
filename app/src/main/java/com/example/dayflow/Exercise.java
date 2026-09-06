@@ -7,6 +7,7 @@ public class Exercise {
     int reps;
     int timerSeconds;
     int restSeconds;
+    boolean completed;
 
     public Exercise(
             String name,
@@ -21,5 +22,6 @@ public class Exercise {
         this.reps = reps;
         this.timerSeconds = timerSeconds;
         this.restSeconds = restSeconds;
+        this.completed = false;
     }
 }

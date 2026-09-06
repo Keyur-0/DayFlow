@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     int currentRep = 1;
 
     boolean isRunning = false;
-
+    boolean waitingForNextExercise = false;
     boolean isUpdatingTimerView = false;
     long remainingMillis = 0;
     boolean isBreakTimer = false;
@@ -145,12 +145,12 @@ public class MainActivity extends AppCompatActivity {
         playButton.setOnClickListener(v -> {
             if (isRunning) {
                 pauseTimer();
-            } else {
-                if (remainingMillis > 0) {
-                    resumeWorkout();
-                } else {
-                    startWorkout();
-                }
+            }
+            else if (remainingMillis > 0) {
+                resumeWorkout();
+            }
+            else {
+                startWorkout();
             }
         });
 
@@ -216,14 +216,19 @@ public class MainActivity extends AppCompatActivity {
                     exercise
             );
         }
-        if (isPastDay) {
             for (int i = 0; i < dayExerciseContainer.getChildCount(); i++) {
-
                 View exerciseView = dayExerciseContainer.getChildAt(i);
 
-                setExerciseEditable(exerciseView, false);
+                Exercise exercise = task.exercises.get(i);
+
+                if (isPastDay || exercise.completed) {
+                    setExerciseEditable(
+                            exerciseView,
+                            false
+                    );
+                }
             }
-        }
+
 
         addExercise.setOnClickListener(v -> {
             if (isPastDay) {
@@ -568,6 +573,11 @@ public class MainActivity extends AppCompatActivity {
             );
         });
 
+        if (exercise.completed) {
+            updateTimerDisplay(timerValue, "DONE");
+            setExerciseEditable(exerciseView, false);
+        }
+
         exerciseContainer.addView(exerciseView);
         jsonManager.saveDays(dayManager.days);
     }
@@ -789,26 +799,29 @@ public class MainActivity extends AppCompatActivity {
             countDownTimer.cancel();
             countDownTimer = null;
         }
-        remainingMillis = 0;
 
-        if (currentExercise >= exerciseContainer.getChildCount()) {
+        remainingMillis = 0;
+        isRunning = false;
+
+        if (currentExercise >= exercises.size()) {
             workoutFinished();
             return;
         }
 
+        Exercise exercise = exercises.get(currentExercise);
+
+        exercise.completed = true;
+
+        jsonManager.saveDays(dayManager.days);
+
         View finishedExerciseView = exerciseContainer.getChildAt(currentExercise);
+
         EditText finishedTimer = finishedExerciseView.findViewById(R.id.timerValue);
 
         updateTimerDisplay(finishedTimer, "DONE");
         setExerciseEditable(finishedExerciseView, false);
-        currentExercise++;
 
-        if (currentExercise < exercises.size()) {
-            startCurrentExercise();
-        }
-        else {
-            workoutFinished();
-        }
+        currentExercise++;
     }
     private void startCurrentExercise() {
         currentSet = 1;
@@ -825,13 +838,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resumeWorkout() {
+
         if (exercises.isEmpty()) {
             return;
         }
+        while (currentExercise < exercises.size()
+                && exercises.get(currentExercise).completed) {
+
+            currentExercise++;
+        }
+
         if (currentExercise >= exercises.size()) {
+            workoutFinished();
             return;
         }
         isRunning = true;
+
         if (remainingMillis > 0) {
             if (isBreakTimer) {
                 startBreakTimer(remainingMillis);
@@ -839,9 +861,10 @@ public class MainActivity extends AppCompatActivity {
             else {
                 startRepTimer(remainingMillis);
             }
+
         }
         else {
-            startRepTimer();
+            startCurrentExercise();
         }
     }
     private void resetWorkout() {
@@ -863,8 +886,18 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < exerciseContainer.getChildCount(); i++) {
             View exerciseView = exerciseContainer.getChildAt(i);
 
-            EditText timerView = exerciseView.findViewById(R.id.timerValue);
             Exercise exercise = exercises.get(i);
+
+            if (exercise.completed) {
+                setExerciseEditable(exerciseView, false);
+
+                EditText timerView = exerciseView.findViewById(R.id.timerValue);
+
+                updateTimerDisplay(timerView, "DONE");
+                continue;
+            }
+
+            EditText timerView = exerciseView.findViewById(R.id.timerValue);
 
             updateTimerDisplay(
                     timerView,
@@ -943,6 +976,15 @@ public class MainActivity extends AppCompatActivity {
         currentExercise = 0;
         currentSet = 1;
         currentRep = 1;
+
+        while (currentExercise < exercises.size()
+                && exercises.get(currentExercise).completed) {
+            currentExercise++;
+        }
+        if (currentExercise >= exercises.size()) {
+            workoutFinished();
+            return;
+        }
 
         isRunning = true;
 
