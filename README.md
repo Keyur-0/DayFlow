@@ -1,9 +1,5 @@
 # DayFlow
 
-<p align="center">
-  <img src="app/src/main/res/drawable/dayflow_logo.png" alt="DayFlow Logo" width="120"/>
-</p>
-
 <h3 align="center">Plan. Train. Flow.</h3>
 
 <p align="center">
