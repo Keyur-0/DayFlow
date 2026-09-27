@@ -19,6 +19,22 @@ public class DayManager {
                 Comparator.comparing(d -> d.date)
         );
     }
+    public void removeEmptyPastDays() {
+        String today = DayUtils.getTodayDate();
+
+        days.removeIf(day -> {
+            if (day.date.compareTo(today) >= 0) {
+                return false;
+            }
+
+            for (Task task : day.tasks) {
+                if (!task.exercises.isEmpty()) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    }
     public Day getDay(String date) {
         for (Day day : days) {
             if (day.date.equals(date)) {

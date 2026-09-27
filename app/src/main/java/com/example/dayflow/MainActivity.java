@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             dayManager = new DayManager();
         }
+        dayManager.removeEmptyPastDays();
 
         String todayDate = DayUtils.getTodayDate();
 
@@ -201,8 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (isPastDay) {
-            addExercise.setEnabled(false);
-            addExercise.setAlpha(0.4f);
+            addExercise.setVisibility(View.GONE);
         }
         Task task = day.tasks.get(0);
 
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
 
             Exercise exercise =
                     new Exercise(
-                            "New Exercise",
+                            "",
                             1,
                             10,
                             5,
