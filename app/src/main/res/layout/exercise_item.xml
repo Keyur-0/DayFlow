@@ -12,6 +12,7 @@
         android:padding="12dp">
 
         <!-- Exercise Row -->
+        <!-- Exercise Name Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,48 +44,6 @@
                 android:textColorHint="#777777"
                 android:textSize="12sp" />
 
-            <!-- Set Label -->
-            <TextView
-                android:id="@+id/setLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Set: "
-                android:textColor="#F8F7FB"
-                android:textSize="14sp" />
-
-            <!-- Sets -->
-            <AutoCompleteTextView
-                android:id="@+id/setInput"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
-                android:gravity="center"
-                android:inputType="number"
-                android:padding="0dp"
-                android:text="2"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
-
-            <!-- Reps Label -->
-            <TextView
-                android:id="@+id/repsLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Reps: "
-                android:textColor="#F8F7FB"
-                android:textSize="14sp" />
-
-            <!-- Reps -->
-            <AutoCompleteTextView
-                android:id="@+id/repsInput"
-                android:layout_width="55dp"
-                android:layout_height="35dp"
-                android:gravity="center"
-                android:inputType="text"
-                android:padding="0dp"
-                android:text="10"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
-
             <!-- Delete -->
             <TextView
                 android:id="@+id/deleteTask"
@@ -97,22 +56,70 @@
 
         </LinearLayout>
 
+        <!-- Sets / Reps Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/setLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="Set:"
+                android:textColor="#F8F7FB"
+                android:textSize="14sp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/setInput"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:padding="0dp"
+                android:text="2"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/repsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="Reps:"
+                android:textColor="#F8F7FB"
+                android:textSize="14sp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/repsInput"
+                android:layout_width="55dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:inputType="text"
+                android:padding="0dp"
+                android:text="10"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- Timer Row -->
         <!-- Timer Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <!-- Timer Type -->
             <AutoCompleteTextView
                 android:id="@+id/timerType"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginStart="12dp"
                 android:gravity="center"
                 android:inputType="none"
                 android:padding="0dp"
@@ -120,12 +127,10 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
-            <!-- Timer -->
             <EditText
                 android:id="@+id/timerValue"
-                android:layout_width="75dp"
+                android:layout_width="65dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="4dp"
                 android:gravity="center"
                 android:inputType="text"
                 android:singleLine="true"
@@ -133,23 +138,19 @@
                 android:textColor="#9F84E7"
                 android:textSize="16sp" />
 
-            <!-- Rest Label -->
             <TextView
                 android:id="@+id/restLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="4dp"
                 android:gravity="center"
                 android:text="Rest"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
-            <!-- Rest -->
             <EditText
                 android:id="@+id/restInput"
                 android:layout_width="65dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="2dp"
                 android:gravity="center"
                 android:inputType="time"
                 android:padding="0dp"
